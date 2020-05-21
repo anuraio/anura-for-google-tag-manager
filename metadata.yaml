@@ -1,5 +1,5 @@
 homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
-  - sha: bf0533bc7eac6fb6dcdd046475b4af216cd6fd55
+  - sha: e029efac77e70cb6bbeb77dfc4b1c572adeaeca3
     changeNotes: Initial release.
