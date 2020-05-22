@@ -33,25 +33,45 @@ ___TEMPLATE_PARAMETERS___
     "type": "TEXT",
     "name": "instanceID",
     "displayName": "Instance ID",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "help": "Your assigned Instance ID",
+    "valueValidators": [
+      {
+        "type": "NUMBER"
+      }
+    ]
   },
   {
     "type": "TEXT",
     "name": "source",
     "displayName": "Source",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "help": "Source and campaign parameters may not equal the following values: \"all sources\", \"all campaigns\", \"\u0026\", \"*\", \"?\", \"%\"",
+    "canBeEmptyString": true
   },
   {
     "type": "TEXT",
     "name": "campaign",
     "displayName": "Campaign",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "help": "Source and campaign parameters may not equal the following values: \"all sources\", \"all campaigns\", \"\u0026\", \"*\", \"?\", \"%\"",
+    "canBeEmptyString": true
   },
   {
     "type": "TEXT",
     "name": "callback",
     "displayName": "Optional Callback Function",
-    "simpleValueType": true
+    "simpleValueType": true,
+    "help": "callback functions are allowed to start with: \"$\", \"_\", or \"a-z\" characters, followed by \"a-z\" and \"0-9\" characters.",
+    "canBeEmptyString": true,
+    "valueValidators": [
+      {
+        "type": "REGEX",
+        "args": [
+          "^$|^[0a-zA-Z$_].[a-zA-Z0-9]*$"
+        ]
+      }
+    ]
   }
 ]
 
@@ -61,6 +81,7 @@ ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 const injectScript = require('injectScript');
 const queryPermission = require('queryPermission');
 const EUC = require('encodeUriComponent');
+const Math = require('Math');
 const instance_id = data.instanceID;
 const source = data.source;
 const campaign = data.campaign;
@@ -146,6 +167,6 @@ setup: ''
 
 ___NOTES___
 
-Created on 5/21/2020, 4:21:30 PM
+Created on 5/22/2020, 2:52:37 PM
 
 
