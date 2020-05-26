@@ -2,4 +2,7 @@ homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
   - sha: 74c40a3e83053e6f9c77f470f1f7ec0093fa5037
-    changeNotes: Initial release.
+    changeNotes: |2
+      updated cachebuster and data encoding
+  - sha: aff09e390050ab749340d00fbf5f5e12b46ddfc0
+    changeNotes: Initial Release.
