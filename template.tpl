@@ -82,6 +82,7 @@ const injectScript = require('injectScript');
 const queryPermission = require('queryPermission');
 const EUC = require('encodeUriComponent');
 const Math = require('Math');
+const generateRandom = require('generateRandom');
 const instance_id = data.instanceID;
 const source = data.source;
 const campaign = data.campaign;
@@ -100,6 +101,10 @@ if(data.hasOwnProperty("campaign")) {
 if(data.hasOwnProperty("callback")) {
   url = url + "&callback=" + EUC(callback);
 }
+
+const cacheBuster = generateRandom(111111111111, 9999999999999999);
+url = url + "&" + cacheBuster;
+
 function onSuccess() {
   data.gtmOnSuccess();
 }
@@ -167,6 +172,6 @@ setup: ''
 
 ___NOTES___
 
-Created on 5/22/2020, 2:52:37 PM
+Created on 5/26/2020, 8:25:37 AM
 
 
