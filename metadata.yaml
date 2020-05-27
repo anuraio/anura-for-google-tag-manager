@@ -1,6 +1,9 @@
 homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
+  - sha: 262af44c73e5300a807122794a27fa30d34df00a
+    changeNotes: |3
+      fixed regex on callback function
   - sha: 74c40a3e83053e6f9c77f470f1f7ec0093fa5037
     changeNotes: |2
       updated cachebuster and data encoding
