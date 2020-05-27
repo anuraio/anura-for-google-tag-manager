@@ -11,7 +11,7 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1,
+  "version": 1.01,
   "securityGroups": [],
   "displayName": "Anura Solutions, LLC",
   "brand": {
@@ -68,7 +68,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "REGEX",
         "args": [
-          "^$|^[0a-zA-Z$_].[a-zA-Z0-9]*$"
+          "^$|^[_$a-zA-Z][_$a-zA-Z0-9]*$"
         ]
       }
     ]
@@ -102,7 +102,7 @@ if(data.hasOwnProperty("callback")) {
   url = url + "&callback=" + EUC(callback);
 }
 
-const cacheBuster = generateRandom(111111111111, 9999999999999999);
+const cacheBuster = generateRandom(1111111111111111, 9999999999999999);
 url = url + "&" + cacheBuster;
 
 function onSuccess() {
@@ -172,6 +172,6 @@ setup: ''
 
 ___NOTES___
 
-Created on 5/26/2020, 8:25:37 AM
+Created on 5/27/2020, 9:41:51 AM
 
 
