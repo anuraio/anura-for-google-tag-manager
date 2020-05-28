@@ -4,8 +4,3 @@ versions:
   - sha: 10367bdbdc10e63ff63c0da85490189598a2c483
     changeNotes: |3
       fixed regex on callback function, new description
-  - sha: 74c40a3e83053e6f9c77f470f1f7ec0093fa5037
-    changeNotes: |2
-      updated cachebuster and data encoding
-  - sha: aff09e390050ab749340d00fbf5f5e12b46ddfc0
-    changeNotes: Initial Release.
