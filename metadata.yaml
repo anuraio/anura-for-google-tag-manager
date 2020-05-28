@@ -2,5 +2,4 @@ homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
   - sha: 10367bdbdc10e63ff63c0da85490189598a2c483
-    changeNotes: |3
-      fixed regex on callback function, new description
+    changeNotes: fixed regex on callback function, new description
