@@ -68,7 +68,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "REGEX",
         "args": [
-          "^$|^[0a-zA-Z$_].[a-zA-Z0-9]*$"
+          "^$|^[_$a-zA-Z][_$a-zA-Z0-9]*$"
         ]
       }
     ]
