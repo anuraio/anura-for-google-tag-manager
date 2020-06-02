@@ -92,14 +92,20 @@ var url = 'https://script.anura.io/request.js';
 if(data.hasOwnProperty("instanceID")) {
   url = url + '?instance=' + EUC(instance_id);
 }
-if(data.hasOwnProperty("source")) {
-  url = url + "&source=" + EUC(source);
+if(data.hasOwnProperty("source") && source) {
+  if(source != "") {
+    url = url + "&source=" + EUC(source);
+  }
 }
-if(data.hasOwnProperty("campaign")) {
-  url = url + "&campaign=" + EUC(campaign);
+if(data.hasOwnProperty("campaign") && campaign) {
+  if(campaign != "") {
+    url = url + "&campaign=" + EUC(campaign);
+  }
 }
 if(data.hasOwnProperty("callback")) {
-  url = url + "&callback=" + EUC(callback);
+  if(callback != "") {
+    url = url + "&callback=" + EUC(callback);
+  }
 }
 
 const cacheBuster = generateRandom(111111111111, 9999999999999999);
