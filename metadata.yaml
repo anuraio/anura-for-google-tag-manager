@@ -1,5 +1,5 @@
 homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
-  - sha: 5fb1cf7cc0f70a5802410511f768b0a4184252a2
-    changeNotes: fixed regex on callback function, new description
+  - sha: 9954880f226a1d1edae21a137e508236097e95ed
+    changeNotes: fixed missing variable bug
