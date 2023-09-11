@@ -1,5 +1,7 @@
 homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
+  - sha: dc216d0122e4238700f7091776be58eed8299ea7
+    changeNotes: Updated icon and scanning reliability
   - sha: 9954880f226a1d1edae21a137e508236097e95ed
     changeNotes: fixed missing variable bug
