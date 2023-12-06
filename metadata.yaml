@@ -1,7 +1,7 @@
 homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
-  - sha: dc524ec7e1c158b463418441813578db4bdb8a9f
+  - sha: 83737b2c14f3ceb132f8069970b5603344eda475
     changeNotes: Added realtime functionality
   - sha: e393772cc4638f3c5c021c7144b50c376cb3638f
     changeNotes: Added functionality to prevent scanning of GTM housekeeping
