@@ -128,6 +128,75 @@ ___TEMPLATE_PARAMETERS___
   },
   {
     "type": "GROUP",
+    "name": "Additional",
+    "displayName": "Additional Data",
+    "groupStyle": "ZIPPY_CLOSED",
+    "subParams": [
+      {
+        "type": "TEXT",
+        "name": "AD1",
+        "displayName": "Additional Data #1",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "AD2",
+        "displayName": "Additional Data #2",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "AD3",
+        "displayName": "Additional Data #3",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "AD4",
+        "displayName": "Additional Data #4",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "AD5",
+        "displayName": "Additional Data #5",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "AD6",
+        "displayName": "Additional Data #6",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "AD7",
+        "displayName": "Additional Data #7",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "AD8",
+        "displayName": "Additional Data #8",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "AD9",
+        "displayName": "Additional Data #9",
+        "simpleValueType": true
+      },
+      {
+        "type": "TEXT",
+        "name": "AD10",
+        "displayName": "Additional Data #10",
+        "simpleValueType": true
+      }
+    ],
+    "help": "Data provided by an Anura client that is to be associated with an individual request."
+  },
+  {
+    "type": "GROUP",
     "name": "actions",
     "displayName": "Real-Time Actions - BETA",
     "groupStyle": "ZIPPY_CLOSED",
@@ -527,6 +596,18 @@ const campaignfb1 = data.campaignfb1;
 const campaignfb2 = data.campaignfb2;
 const callback = data.callback;
 
+// Basic Variables
+const ad1 = data.AD1;
+const ad2 = data.AD2;
+const ad3 = data.AD3;
+const ad4 = data.AD4;
+const ad5 = data.AD5;
+const ad6 = data.AD6;
+const ad7 = data.AD7;
+const ad8 = data.AD8;
+const ad9 = data.AD9;
+const ad10 = data.AD10;
+
 // REALTIME Variables
 const realtime_enabled = data.realtime_enabled;
 const action_on_warn = data.AOWarn;
@@ -699,6 +780,22 @@ if(data.hasOwnProperty("callback")) {
           url = url + "&callback=" + EUC(callback);
         }
     }
+}
+
+if((data.hasOwnProperty("AD1") && ad1) || (data.hasOwnProperty("AD2") && ad2) || (data.hasOwnProperty("AD3") && ad3) || (data.hasOwnProperty("AD4") && ad4) || (data.hasOwnProperty("AD5") && ad5) || (data.hasOwnProperty("AD6") && ad6) || (data.hasOwnProperty("AD7") && ad7) || (data.hasOwnProperty("AD8") && ad8) || (data.hasOwnProperty("AD9") && ad9) || (data.hasOwnProperty("AD10") && ad10)) {
+  url = url + "&additional={";
+  if (data.hasOwnProperty("AD1") && ad1) { url = url + '"1":"'+EUC(ad1)+'",'; }
+  if (data.hasOwnProperty("AD2") && ad2) { url = url + '"2":"'+EUC(ad2)+'",'; }
+  if (data.hasOwnProperty("AD3") && ad3) { url = url + '"3":"'+EUC(ad3)+'",'; }
+  if (data.hasOwnProperty("AD4") && ad4) { url = url + '"4":"'+EUC(ad4)+'",'; }
+  if (data.hasOwnProperty("AD5") && ad5) { url = url + '"5":"'+EUC(ad5)+'",'; }
+  if (data.hasOwnProperty("AD6") && ad6) { url = url + '"6":"'+EUC(ad6)+'",'; }
+  if (data.hasOwnProperty("AD7") && ad7) { url = url + '"7":"'+EUC(ad7)+'",'; }
+  if (data.hasOwnProperty("AD8") && ad8) { url = url + '"8":"'+EUC(ad8)+'",'; }
+  if (data.hasOwnProperty("AD9") && ad9) { url = url + '"9":"'+EUC(ad9)+'",'; }
+  if (data.hasOwnProperty("AD10") && ad10) { url = url + '"10":"'+EUC(ad10)+'",'; }
+  url = url.slice(0,-1);
+  url = url + "}";
 }
 
 //const cacheBuster = generateRandom(111111111111, 9999999999999999);
@@ -1506,7 +1603,7 @@ ___WEB_PERMISSIONS___
           "key": "environments",
           "value": {
             "type": 1,
-            "string": "all"
+            "string": "debug"
           }
         }
       ]
