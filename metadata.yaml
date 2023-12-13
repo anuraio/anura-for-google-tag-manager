@@ -1,6 +1,8 @@
 homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
+  - sha: 3d6fec3253cbec4596a50bd005e3f6cff43d8ffe
+    changeNotes: Fixed Permissions for disable links
   - sha: 9828255c7d53c91d6e82b7eb0c69d835e2254af9
     changeNotes: Added Additional Data to GTM
   - sha: dc524ec7e1c158b463418441813578db4bdb8a9f
