@@ -1,6 +1,8 @@
 homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
+  - sha: 6058f88b88bd63b7c69961bd197cbc87acd00661
+    changeNotes: GTM Pixel Fix
   - sha: 3d6fec3253cbec4596a50bd005e3f6cff43d8ffe
     changeNotes: Fixed Permissions for disable links
   - sha: 9828255c7d53c91d6e82b7eb0c69d835e2254af9
