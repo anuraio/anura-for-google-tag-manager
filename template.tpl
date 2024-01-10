@@ -5,13 +5,12 @@ Template Gallery Developer Terms of Service available at
 https://developers.google.com/tag-manager/gallery-tos (or such other URL as
 Google may provide), as modified from time to time.
 
-
 ___INFO___
 
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1.5,
+  "version": 1.6,
   "securityGroups": [],
   "displayName": "Anura Solutions, LLC",
   "brand": {
@@ -585,7 +584,7 @@ const createQueue = require('createQueue');
 const parseUrl = require("parseUrl");
 const Object = require("Object");
 const injectHiddenIframe = require('injectHiddenIframe');
-
+const createArgumentsQueue = require('createArgumentsQueue');
 // Basic Variables
 const instance_id = data.instanceID;
 const source = data.source;
@@ -678,17 +677,8 @@ function frEnc(y, p) {
 }
 
 function gAdsExclusion(){
-  
-  injectScript("https://www.googletagmanager.com/gtag/js?id="+gads_tagid, gAds2, onFailure);
-  
-}
-function gAds2() {
-  var dataLayer = dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', getTimestampMillis());
-  gtag('config', gads_tagid);
-  gtag('set',  { 'cookie_flags': 'SameSite:None;Secure' });
-  gtag('event', 'anura_exclusion', {'send_to': gads_tagid}); 
+   const gtag = createArgumentsQueue('gtag', 'dataLayer');
+   gtag('event', 'anura_exclusion', {'send_to': gads_tagid}); 
 }
 
 function process_realtime_action(result) {
@@ -1573,6 +1563,45 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 1,
                     "string": "anura_gtm_disableLinks"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "gtag"
                   },
                   {
                     "type": 8,
