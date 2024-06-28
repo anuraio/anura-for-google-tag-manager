@@ -5,13 +5,12 @@ Template Gallery Developer Terms of Service available at
 https://developers.google.com/tag-manager/gallery-tos (or such other URL as
 Google may provide), as modified from time to time.
 
-
 ___INFO___
 
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 2.0,
+  "version": 1.7,
   "securityGroups": [],
   "displayName": "Anura Solutions, LLC",
   "brand": {
@@ -198,7 +197,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "GROUP",
     "name": "actions",
-    "displayName": "Real-Time Actions",
+    "displayName": "Real-Time Actions - BETA",
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
       {
@@ -710,30 +709,29 @@ function process_realtime_action(result) {
 setInWindow('anura_custom_gtm_callback', function(response) {
    //logToConsole('Calling Check For Anura Variable');
    function process_realtime_decision(result) {
-	    if(append_hidden_variable_checkbox) {
-	        callInWindow('anura_gtm_appendHiddenInput', result.getResult(), append_hidden_variable, retry_count, stop_after_first);
-	    }
-	    if(action_on_warn && result.isWarning()) {
-	      process_realtime_action();
-	    }
-	    if(action_on_bad && result.isBad()) {
-	      process_realtime_action();
-	    }
-	}
+      if(append_hidden_variable_checkbox) {
+          callInWindow('anura_gtm_appendHiddenInput', result.getResult(), append_hidden_variable, retry_count, stop_after_first);
+      }
+      if(action_on_warn && result.isWarning()) {
+        process_realtime_action();
+      }
+      if(action_on_bad && result.isBad()) {
+        process_realtime_action();
+      }
+  }
    if (response.getResult()) {
-   	  //Full response is on
+      //Full response is on
       //logToConsole("Full Response ON");
-   	  process_realtime_decision(response);
+      process_realtime_decision(response);
    } else {
       //Full response is off
      //logToConsole("Full Response OFF");
-   	  response.queryResult(process_realtime_decision);
+      response.queryResult(process_realtime_decision);
    }
    if(callback != "") {
       callInWindow('anura_gtm_additional_callback', EUC(callback), response);
    }
 }, true);
-
 
 
 if(data.hasOwnProperty("instanceID")) {
@@ -787,11 +785,11 @@ if((data.hasOwnProperty("AD1") && ad1) || (data.hasOwnProperty("AD2") && ad2) ||
 url = url + "&" + getTimestampMillis();
 
 function onSuccess() {
-  //logToConsole('onSuccess');
+  logToConsole('onSuccess');
   data.gtmOnSuccess();
 }
 function onFailure () {
-  //logToConsole('onFailure');
+  logToConsole('onFailure');
   data.gtmOnFailure();
 }
 if (queryPermission('inject_script', url) && instance_id) {
@@ -1717,7 +1715,7 @@ scenarios:
   code: |
     const mockData = {
       // Mocked field values
-      "instance_id":"123456789",
+      "instance_id":"2227668113",
       "source":"mysource",
       "campaign":"mycampaign",
       "callback":"mycallbackfunction"
@@ -1731,6 +1729,5 @@ setup: ''
 ___NOTES___
 
 Created on 5/26/2020, 8:25:37 AM
-
 
 
