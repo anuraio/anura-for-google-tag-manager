@@ -1,16 +1,17 @@
-﻿___TERMS_OF_SERVICE___
+___TERMS_OF_SERVICE___
 
 By creating or modifying this file you agree to Google Tag Manager's Community
 Template Gallery Developer Terms of Service available at
 https://developers.google.com/tag-manager/gallery-tos (or such other URL as
 Google may provide), as modified from time to time.
 
+
 ___INFO___
 
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1.6,
+  "version": 2.0,
   "securityGroups": [],
   "displayName": "Anura Solutions, LLC",
   "brand": {
@@ -197,7 +198,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "GROUP",
     "name": "actions",
-    "displayName": "Real-Time Actions - BETA",
+    "displayName": "Real-Time Actions",
     "groupStyle": "ZIPPY_CLOSED",
     "subParams": [
       {
@@ -205,18 +206,6 @@ ___TEMPLATE_PARAMETERS___
         "name": "realtime_enabled",
         "checkboxText": "Enable Real-Time",
         "simpleValueType": true
-      },
-      {
-        "type": "LABEL",
-        "name": "label1",
-        "displayName": "*Full Response \u003cem\u003eMust\u003c/em\u003e be enabled to use Real-Time Actions in this template. \nThe Anura GTM Real-Time Functions must also be present",
-        "enablingConditions": [
-          {
-            "paramName": "realtime_enabled",
-            "paramValue": true,
-            "type": "EQUALS"
-          }
-        ]
       },
       {
         "type": "GROUP",
@@ -718,27 +707,33 @@ function process_realtime_action(result) {
   }
 }
 
-function process_realtime_decision(result) {
-    if(append_hidden_variable_checkbox) {
-      callInWindow('anura_gtm_appendHiddenInput', result, append_hidden_variable, retry_count, stop_after_first);
-    }
-    if(action_on_warn && (result == "warn" || result == "warning")) {
-      process_realtime_action(result);
-    }
-    if(action_on_bad && result == "bad") {
-      process_realtime_action(result);
-    }
-}
-
 setInWindow('anura_custom_gtm_callback', function(response) {
-   logToConsole('Calling Check For Anura Variable');
-   if (response.getId() || response.getExId()) {
-      process_realtime_decision(response.getResult());
+   //logToConsole('Calling Check For Anura Variable');
+   function process_realtime_decision(result) {
+	    if(append_hidden_variable_checkbox) {
+	        callInWindow('anura_gtm_appendHiddenInput', result.getResult(), append_hidden_variable, retry_count, stop_after_first);
+	    }
+	    if(action_on_warn && result.isWarning()) {
+	      process_realtime_action();
+	    }
+	    if(action_on_bad && result.isBad()) {
+	      process_realtime_action();
+	    }
+	}
+   if (response.getResult()) {
+   	  //Full response is on
+      //logToConsole("Full Response ON");
+   	  process_realtime_decision(response);
+   } else {
+      //Full response is off
+     //logToConsole("Full Response OFF");
+   	  response.queryResult(process_realtime_decision);
    }
    if(callback != "") {
       callInWindow('anura_gtm_additional_callback', EUC(callback), response);
    }
 }, true);
+
 
 
 if(data.hasOwnProperty("instanceID")) {
@@ -792,11 +787,11 @@ if((data.hasOwnProperty("AD1") && ad1) || (data.hasOwnProperty("AD2") && ad2) ||
 url = url + "&" + getTimestampMillis();
 
 function onSuccess() {
-  logToConsole('onSuccess');
+  //logToConsole('onSuccess');
   data.gtmOnSuccess();
 }
 function onFailure () {
-  logToConsole('onFailure');
+  //logToConsole('onFailure');
   data.gtmOnFailure();
 }
 if (queryPermission('inject_script', url) && instance_id) {
@@ -1722,7 +1717,7 @@ scenarios:
   code: |
     const mockData = {
       // Mocked field values
-      "instance_id":"2227668113",
+      "instance_id":"123456789",
       "source":"mysource",
       "campaign":"mycampaign",
       "callback":"mycallbackfunction"
@@ -1736,5 +1731,6 @@ setup: ''
 ___NOTES___
 
 Created on 5/26/2020, 8:25:37 AM
+
 
 
