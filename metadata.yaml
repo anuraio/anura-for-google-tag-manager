@@ -1,7 +1,7 @@
 homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
-  - sha: 425cb4a7d097434e5d727d5eb2d4c8371692186c
+  - sha: 2dd0da034d1c2f7fa6af67959e0e2b22a144657f
     changeNotes: Improvements to integration code full response no longer required
   - sha: 6058f88b88bd63b7c69961bd197cbc87acd00661
     changeNotes: GTM Pixel Fix
