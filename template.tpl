@@ -10,7 +10,7 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1.7,
+  "version": 1.8,
   "securityGroups": [],
   "displayName": "Anura Solutions, LLC",
   "brand": {
@@ -234,24 +234,10 @@ ___TEMPLATE_PARAMETERS___
         "subParams": [
           {
             "type": "CHECKBOX",
-            "name": "disable_form_action",
-            "checkboxText": "Disable Form Action",
+            "name": "disable_inputs",
+            "checkboxText": "Disable Inputs",
             "simpleValueType": true,
-            "help": "Applies to all forms found on page"
-          },
-          {
-            "type": "CHECKBOX",
-            "name": "disable_submit_buttons",
-            "checkboxText": "Disable Submit Buttons",
-            "simpleValueType": true,
-            "help": "Applies to all submit buttons found on page"
-          },
-          {
-            "type": "CHECKBOX",
-            "name": "disable_links",
-            "checkboxText": "Disable Links",
-            "simpleValueType": true,
-            "help": "Applies to all links found on page"
+            "help": "Disable Forms, Buttons, Inputs"
           },
           {
             "type": "CHECKBOX",
@@ -270,52 +256,6 @@ ___TEMPLATE_PARAMETERS___
                 "paramName": "append_hidden_variable_checkbox",
                 "paramValue": true,
                 "type": "EQUALS"
-              }
-            ]
-          },
-          {
-            "type": "GROUP",
-            "name": "advanced",
-            "displayName": "(Advanced) Looping Settings",
-            "groupStyle": "ZIPPY_CLOSED",
-            "subParams": [
-              {
-                "type": "RADIO",
-                "name": "retrycount",
-                "displayName": "Retry Method",
-                "radioItems": [
-                  {
-                    "value": 20,
-                    "displayValue": "Retry for 4 Seconds"
-                  },
-                  {
-                    "value": 150,
-                    "displayValue": "Retry for 30 Seconds"
-                  },
-                  {
-                    "value": 600,
-                    "displayValue": "Retry for 2 min"
-                  }
-                ],
-                "simpleValueType": true,
-                "help": "Forms and buttons can get added after the initial page load. Retries are performed every 200ms to attempt active protection on content loaded after initial load."
-              },
-              {
-                "type": "RADIO",
-                "name": "stopafterfirst",
-                "displayName": "Stop After First Found Element",
-                "radioItems": [
-                  {
-                    "value": "continue",
-                    "displayValue": "Repeat for configured retry time"
-                  },
-                  {
-                    "value": "stop",
-                    "displayValue": "Stop After First find"
-                  }
-                ],
-                "simpleValueType": true,
-                "help": "You can choose to stop after the first detected \u0026 protected element is found, or continue in the event that more elements to be protected are added after the first."
               }
             ]
           }
@@ -368,13 +308,6 @@ ___TEMPLATE_PARAMETERS___
                 "displayName": "Exclusion Audience Tag ID",
                 "simpleValueType": true,
                 "help": "Example: 19515249"
-              },
-              {
-                "type": "TEXT",
-                "name": "MSads_eventcode",
-                "displayName": "Custom Event Code",
-                "simpleValueType": true,
-                "help": "an_exaud_12345abcxyz"
               }
             ]
           },
@@ -397,13 +330,6 @@ ___TEMPLATE_PARAMETERS___
                 "displayName": "Exclusion Audience Pixel ID",
                 "simpleValueType": true,
                 "help": "Example: 195152490228060"
-              },
-              {
-                "type": "TEXT",
-                "name": "metaads_eventcode",
-                "displayName": "Custom Event Code",
-                "simpleValueType": true,
-                "help": "Example: an_exaud_12345abcxyz"
               }
             ]
           },
@@ -426,13 +352,6 @@ ___TEMPLATE_PARAMETERS___
                 "displayName": "Exclusion Audience Tag ID",
                 "simpleValueType": true,
                 "help": "Example: 19515249"
-              },
-              {
-                "type": "TEXT",
-                "name": "Xads_eventcode",
-                "displayName": "Custom Event Code",
-                "simpleValueType": true,
-                "help": "an_exaud_12345abcxyz"
               }
             ]
           },
@@ -484,13 +403,6 @@ ___TEMPLATE_PARAMETERS___
                 "displayName": "Exclusion Audience Pixel ID",
                 "simpleValueType": true,
                 "help": "Example: 19515249"
-              },
-              {
-                "type": "TEXT",
-                "name": "ttads_eventcode",
-                "displayName": "Custom Event Code",
-                "simpleValueType": true,
-                "help": "an_exaud_12345abcxyz"
               }
             ]
           },
@@ -599,26 +511,11 @@ const ad10 = data.AD10;
 const realtime_enabled = data.realtime_enabled;
 const action_on_warn = data.AOWarn;
 const action_on_bad = data.AOBad;
-const disable_form_action = data.disable_form_action;
-const disable_links = data.disable_links;
-const disable_submit_buttons = data.disable_submit_buttons;
+const disable_inputs = data.disable_inputs;
 const append_hidden_variable_checkbox = data.append_hidden_variable_checkbox;
 const append_hidden_variable = data.append_hidden_variable;
-var retry_count = data.retrycount;
-var stop_after_first = data.stopafterfirst;
 
 const logToConsole = require('logToConsole');
-//logToConsole('realtime_enabled: ' + realtime_enabled);
-//logToConsole('retry_count: ' + retry_count);
-//logToConsole('stop_after_first: ' + stop_after_first);
-
-if(retry_count == null) {
-  retry_count = 20; 
-}
-if(stop_after_first == null) {
-  stop_after_first = "continue"; 
-}
-
 
 // Search and Social Protect Variables
 // Google Ads
@@ -627,15 +524,12 @@ const gads_tagid = data.gads_tagid;
 // Microsoft Ads
 const MSads_enable = data.MSads_enable;
 const MSads_tagid = data.MSads_tagid;
-const MSads_eventcode = data.MSads_eventcode;
 // Meta Ads
 const metaads_enable = data.metaads_enable;
 const metaads_pixelid = data.metaads_pixelid;
-const metaads_eventcode = data.metaads_eventcode;
 // X (Twitter Ads)
 const Xads_enable = data.Xads_enable;
 const Xads_tagid = data.Xads_tagid;
-const Xads_eventcode = data.Xads_eventcode;
 // LinkedIn Ads
 const liads_enable = data.liads_enable;
 const liads_partnerid = data.liads_partnerid;
@@ -643,7 +537,6 @@ const liads_eventcode = data.liads_eventcode;
 // Tiktok Ads
 const ttads_enable = data.ttads_enable;
 const ttads_pixelid = data.ttads_pixelid;
-const ttads_eventcode = data.ttads_eventcode;
 // Taboola Ads
 const tabads_enable = data.tabads_enable;
 const tabads_tagid = data.tabads_tagid;
@@ -664,59 +557,51 @@ function frEnc(y, p) {
   return b;
 }
 
-function gAdsExclusion(){
-   const gtag = createArgumentsQueue('gtag', 'dataLayer');
-   gtag('event', 'anura_exclusion', {'send_to': gads_tagid}); 
-}
-
-function process_realtime_action(result) {
+function process_realtime_action(AnuraLib) {
   logToConsole("performing active mitigation now");
-  if(disable_form_action) {
-     callInWindow('anura_gtm_disableFormAction', retry_count, stop_after_first);
-  }
-  if(disable_links) {
-     callInWindow('anura_gtm_disableLinks', retry_count, stop_after_first);
-  }
-  if(disable_submit_buttons) {
-    callInWindow('anura_gtm_removeSubmitButtons', retry_count, stop_after_first);
+  if(disable_inputs) {
+     AnuraLib.actions.disableInputs();
   }
   if(gads_enable) {
-    gAdsExclusion();
+    AnuraLib.google.addExclusions([gads_tagid]);
   }
   if(metaads_enable) {
-    callInWindow('anura_gtm_metaExclusionAudience', metaads_pixelid, metaads_eventcode);
+    AnuraLib.meta.addExclusions([metaads_pixelid]);
   }
   if(Xads_enable) {
-    callInWindow('anura_gtm_XExclusionAudience', Xads_tagid, Xads_eventcode);
+    AnuraLib.x.addExclusions([Xads_tagid]);
   }
   if(MSads_enable) {
-    callInWindow('anura_gtm_microsoftAdsExclusionAudience', MSads_tagid, MSads_eventcode);
+    AnuraLib.microsoft.addExclusions([MSads_tagid]);
   }
   if(liads_enable) {
-    callInWindow('anura_gtm_LinkedInExclusionAudience', liads_partnerid, liads_eventcode);
+    AnuraLib.linkedin.addExclusion(liads_partnerid, liads_eventcode);
   }
   if(ttads_enable) {
-    callInWindow('anura_gtm_TikTokExclusionAudience', ttads_pixelid, ttads_eventcode);
+    AnuraLib.tiktok.addExclusions([ttads_pixelid]);
   }
   if(tabads_enable) {
-    callInWindow('anura_gtm_TaboolaExclusionAudience', tabads_tagid);
+    AnuraLib.taboola.addExclusion(tabads_tagid);
   }
   if(obads_enable) {
-    callInWindow('anura_gtm_OutBrainExclusionAudience', obads_tagid);
+    AnuraLib.outbrain.addExclusion(obads_tagid);
   }
 }
 
 setInWindow('anura_custom_gtm_callback', function(response) {
    //logToConsole('Calling Check For Anura Variable');
+   const AnuraLib = callInWindow('Anura.getLib');
    function process_realtime_decision(result) {
+      
       if(append_hidden_variable_checkbox) {
-          callInWindow('anura_gtm_appendHiddenInput', result.getResult(), append_hidden_variable, retry_count, stop_after_first);
+        AnuraLib.actions.setValue(result, append_hidden_variable);
       }
+      
       if(action_on_warn && result.isWarning()) {
-        process_realtime_action();
+        process_realtime_action(AnuraLib);
       }
       if(action_on_bad && result.isBad()) {
-        process_realtime_action();
+        process_realtime_action(AnuraLib);
       }
   }
    if (response.getResult()) {
@@ -970,45 +855,6 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
-                    "string": "anuratag_exclusion_lists"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
                     "string": "dataLayer"
                   },
                   {
@@ -1048,7 +894,7 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
-                    "string": "anura_gtm_googleAdsExclusionAudience"
+                    "string": "gtag"
                   },
                   {
                     "type": 8,
@@ -1087,7 +933,7 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
-                    "string": "anura_gtm_metaExclusionAudience"
+                    "string": "Anura"
                   },
                   {
                     "type": 8,
@@ -1126,280 +972,7 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
-                    "string": "anura_gtm_microsoftAdsExclusionAudience"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "anura_gtm_XExclusionAudience"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "anura_gtm_LinkedInExclusionAudience"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "anura_gtm_TikTokExclusionAudience"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "anura_gtm_disableFormAction"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "anura_gtm_removeSubmitButtons"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "anura_gtm_appendHiddenInput"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "anura_gtm_result_handler"
+                    "string": "Anura.getLib"
                   },
                   {
                     "type": 8,
@@ -1439,162 +1012,6 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 1,
                     "string": "anura_gtm_additional_callback"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "anura_gtm_OutBrainExclusionAudience"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "anura_gtm_TaboolaExclusionAudience"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "anura_gtm_disableLinks"
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  },
-                  {
-                    "type": 8,
-                    "boolean": true
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "key"
-                  },
-                  {
-                    "type": 1,
-                    "string": "read"
-                  },
-                  {
-                    "type": 1,
-                    "string": "write"
-                  },
-                  {
-                    "type": 1,
-                    "string": "execute"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "gtag"
                   },
                   {
                     "type": 8,
@@ -1715,7 +1132,7 @@ scenarios:
   code: |
     const mockData = {
       // Mocked field values
-      "instance_id":"2227668113",
+      "instance_id":"123456789",
       "source":"mysource",
       "campaign":"mycampaign",
       "callback":"mycallbackfunction"
