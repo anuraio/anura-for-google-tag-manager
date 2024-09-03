@@ -1,6 +1,8 @@
 homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
+  - sha: ccb017171e849c365dea32f655de3846c775c321
+    changeNotes: Fixed Hidden Variable issue
   - sha: 33d76bbf74419d8183f76281349bf6aac45a4424
     changeNotes: No longer need additional tag of helper functions for realtime actions
   - sha: 2dd0da034d1c2f7fa6af67959e0e2b22a144657f
