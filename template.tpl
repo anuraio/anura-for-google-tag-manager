@@ -594,7 +594,7 @@ setInWindow('anura_custom_gtm_callback', function(response) {
    function process_realtime_decision(result) {
       
       if(append_hidden_variable_checkbox) {
-        AnuraLib.actions.setValue(result, append_hidden_variable);
+        AnuraLib.actions.setValue(result.getResult(), append_hidden_variable);
       }
       
       if(action_on_warn && result.isWarning()) {
