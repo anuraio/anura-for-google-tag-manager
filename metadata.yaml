@@ -1,6 +1,8 @@
 homepage: "https://www.anura.io"
 documentation: "https://docs.anura.io/"
 versions:
+  - sha: c56a516d243a88b4e9b038a9b144c33b987fc2e2
+    changeNotes: Pinterest Exclusion Audience Added
   - sha: ccb017171e849c365dea32f655de3846c775c321
     changeNotes: Fixed Hidden Variable issue
   - sha: 33d76bbf74419d8183f76281349bf6aac45a4424
