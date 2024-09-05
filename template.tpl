@@ -10,7 +10,7 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1.8,
+  "version": 1.9.2,
   "securityGroups": [],
   "displayName": "Anura Solutions, LLC",
   "brand": {
@@ -449,6 +449,28 @@ ___TEMPLATE_PARAMETERS___
                 "help": "Example: 004e654328ead46bc9d54e2ec34b3ce7c4"
               }
             ]
+          },
+          {
+            "type": "GROUP",
+            "name": "PinterestAds",
+            "displayName": "Pinterest Exclusion Audience",
+            "groupStyle": "ZIPPY_OPEN_ON_PARAM",
+            "subParams": [
+              {
+                "type": "CHECKBOX",
+                "name": "pinads_enable",
+                "checkboxText": "Enable Adding to Exclusion Audience",
+                "simpleValueType": true,
+                "help": "Check out the Anura Dashboard or Contact Support for Instructions"
+              },
+              {
+                "type": "TEXT",
+                "name": "pinads_tagid",
+                "displayName": "Pinterest Tag ID",
+                "simpleValueType": true,
+                "help": "Example: 004e654328ead46bc9d54e2ec34b3ce7c4"
+              }
+            ]
           }
         ]
       }
@@ -543,6 +565,10 @@ const tabads_tagid = data.tabads_tagid;
 // Outbrain Ads
 const obads_enable = data.obads_enable;
 const obads_tagid = data.obads_tagid;
+// Pinterest Ads
+const pinads_enable = data.pinads_enable;
+const pinads_tagid = data.pinads_tagid;
+
 
 var url = 'https://script.anura.io/request.js';
 
@@ -585,6 +611,9 @@ function process_realtime_action(AnuraLib) {
   }
   if(obads_enable) {
     AnuraLib.outbrain.addExclusion(obads_tagid);
+  }
+  if(pinads_enable) {
+    AnuraLib.pinterest.addExclusions([pinads_tagid]);
   }
 }
 
