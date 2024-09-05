@@ -13,6 +13,7 @@ ___INFO___
   "version": 1.9,
   "securityGroups": [],
   "displayName": "Anura Solutions, LLC",
+  "categories": ["AFFILIATE_MARKETING", "ADVERTISING", "ADFRAUD", "AD-FRAUD", "MITIGATION"],
   "brand": {
     "id": "github.com_anuraio",
     "displayName": "anuraio",
