@@ -10,7 +10,7 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1.9.2,
+  "version": 1.9,
   "securityGroups": [],
   "displayName": "Anura Solutions, LLC",
   "brand": {
